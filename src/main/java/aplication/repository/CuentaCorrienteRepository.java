@@ -1,5 +1,6 @@
 package aplication.repository;
 
+<<<<<<< HEAD
 import aplication.configuration.DatabaseConnection;
 import aplication.domain.CuentaCorriente;
 import aplication.persistence.mapper.CuentaCorrienteRowMapper;
@@ -50,10 +51,37 @@ public class CuentaCorrienteRepository implements CuentaCorrienteRepositoryPort 
         } catch (SQLException e) {
             throw new RuntimeException("Error al actualizar cuenta corriente: " + e.getMessage(), e);
         }
+=======
+import aplication.domain.CuentaCorriente;
+import aplication.domain.enums.EstadoCuenta;
+import aplication.service.ports.CuentaCorrienteRepositoryPort;
+import java.time.LocalDateTime;
+import java.util.*;
+
+public class CuentaCorrienteRepository implements CuentaCorrienteRepositoryPort {
+
+    private final List<CuentaCorriente> cuentas = new ArrayList<>(Arrays.asList(
+            new CuentaCorriente("CC-001", 3000000, LocalDateTime.now(), EstadoCuenta.ACTIVA, 10.0, 300000),
+            new CuentaCorriente("CC-002", 800000, LocalDateTime.now(), EstadoCuenta.ACTIVA, 10.0, 80000)
+    ));
+
+    @Override
+    public CuentaCorriente save(CuentaCorriente cuenta) { cuentas.add(cuenta); return cuenta; }
+
+    @Override
+    public CuentaCorriente update(String numeroCuenta, CuentaCorriente cuenta) {
+        for (int i = 0; i < cuentas.size(); i++) {
+            if (cuentas.get(i).getNumeroCuenta().equals(numeroCuenta)) {
+                cuentas.set(i, cuenta); return cuenta;
+            }
+        }
+        throw new IllegalArgumentException("Cuenta no encontrada: " + numeroCuenta);
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
     }
 
     @Override
     public Optional<CuentaCorriente> findByNumeroCuenta(String numeroCuenta) {
+<<<<<<< HEAD
         String sql = "SELECT c.*, cl.nombre_completo FROM cuenta c JOIN cliente cl ON c.cliente_id = cl.id WHERE c.numero_cuenta = ? AND c.tipo = 'CORRIENTE'";
         try (PreparedStatement ps = getConn().prepareStatement(sql)) {
             ps.setString(1, numeroCuenta);
@@ -87,5 +115,19 @@ public class CuentaCorrienteRepository implements CuentaCorrienteRepositoryPort 
         } catch (SQLException e) {
             throw new RuntimeException("Error al eliminar cuenta corriente: " + e.getMessage(), e);
         }
+=======
+        for (CuentaCorriente c : cuentas)
+            if (c.getNumeroCuenta().equals(numeroCuenta)) return Optional.of(c);
+        return Optional.empty();
+    }
+
+    @Override
+    public List<CuentaCorriente> findAll() { return cuentas; }
+
+    @Override
+    public void deleteByNumeroCuenta(String numeroCuenta) {
+        boolean removed = cuentas.removeIf(c -> c.getNumeroCuenta().equals(numeroCuenta));
+        System.out.println(removed ? "Cuenta eliminada." : "Cuenta no encontrada.");
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
     }
 }

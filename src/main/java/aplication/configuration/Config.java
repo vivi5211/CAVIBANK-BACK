@@ -4,12 +4,18 @@ import aplication.repository.ClienteRepository;
 import aplication.repository.CuentaAhorrosRepository;
 import aplication.repository.CuentaCorrienteRepository;
 import aplication.repository.TarjetaCreditoRepository;
+<<<<<<< HEAD
 import aplication.service.AuthServiceImpl;
+=======
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
 import aplication.service.ClienteServiceImpl;
 import aplication.service.CuentaAhorrosServiceImpl;
 import aplication.service.CuentaCorrienteServiceImpl;
 import aplication.service.TarjetaCreditoServiceImpl;
+<<<<<<< HEAD
 import aplication.service.outputs.AuthService;
+=======
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
 import aplication.service.outputs.ClienteService;
 import aplication.service.outputs.CuentaAhorrosService;
 import aplication.service.outputs.CuentaCorrienteService;
@@ -22,13 +28,17 @@ import aplication.userinterface.MenuApp;
 import aplication.view.ClienteView;
 import aplication.view.CuentaAhorrosView;
 import aplication.view.CuentaCorrienteView;
+<<<<<<< HEAD
 import aplication.view.LoginView;
+=======
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
 import aplication.view.TarjetaCreditoView;
 
 public class Config {
 
     public static MenuApp createMenuApp() {
 
+<<<<<<< HEAD
         // Repositorio cliente (implementa ClienteRepositoryPort y AuthRepositoryPort)
         ClienteRepository clienteRepository = new ClienteRepository();
 
@@ -38,6 +48,11 @@ public class Config {
 
         // Cliente
         ClienteService clienteService = new ClienteServiceImpl(clienteRepository);
+=======
+        // Cliente
+        ClienteRepositoryPort clientePort = new ClienteRepository();
+        ClienteService clienteService = new ClienteServiceImpl(clientePort);
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
         ClienteView clienteView = new ClienteView(clienteService);
 
         // Cuenta Ahorros
@@ -55,6 +70,10 @@ public class Config {
         TarjetaCreditoService tarjetaService = new TarjetaCreditoServiceImpl(tarjetaPort);
         TarjetaCreditoView tarjetaView = new TarjetaCreditoView(tarjetaService);
 
+<<<<<<< HEAD
         return new MenuApp(loginView, clienteView, ahorrosView, corrienteView, tarjetaView);
+=======
+        return new MenuApp(clienteView, ahorrosView, corrienteView, tarjetaView);
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
     }
 }

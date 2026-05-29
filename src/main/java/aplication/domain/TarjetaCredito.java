@@ -75,6 +75,7 @@ public class TarjetaCredito extends Cuenta implements ITransferible {
     public void setDeuda(double deuda) { this.deuda = deuda; }
     public int getNumeroCuotas() { return numeroCuotas; }
     public void setNumeroCuotas(int numeroCuotas) { this.numeroCuotas = numeroCuotas; }
+<<<<<<< HEAD
 
     private int clienteId;
     public int getClienteId() { return clienteId; }
@@ -91,4 +92,6 @@ public class TarjetaCredito extends Cuenta implements ITransferible {
                 ", clienteId=" + clienteId +
                 '}';
     }
+=======
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
 }

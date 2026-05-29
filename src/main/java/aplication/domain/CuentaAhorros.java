@@ -69,8 +69,11 @@ public class CuentaAhorros extends Cuenta implements ITransferible {
         return "CuentaAhorros{numeroCuenta='" + numeroCuenta + "', saldo=" + saldo +
                 ", tasaInteres=" + tasaInteres + "%, estado=" + estado.getDescripcion() + "}";
     }
+<<<<<<< HEAD
 
     private int clienteId;
     public int getClienteId() { return clienteId; }
     public void setClienteId(int clienteId) { this.clienteId = clienteId; }
+=======
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
 }

@@ -15,6 +15,7 @@ public enum EstadoCuenta {
     public String getDescripcion() {
         return descripcion;
     }
+<<<<<<< HEAD
 
     public static EstadoCuenta fromString(String valor) {
         for (EstadoCuenta e : values()) {
@@ -24,4 +25,6 @@ public enum EstadoCuenta {
         }
         throw new IllegalArgumentException("Estado de cuenta no válido: " + valor);
     }
+=======
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
 }

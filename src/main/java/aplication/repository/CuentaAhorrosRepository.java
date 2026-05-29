@@ -1,5 +1,6 @@
 package aplication.repository;
 
+<<<<<<< HEAD
 import aplication.configuration.DatabaseConnection;
 import aplication.domain.CuentaAhorros;
 import aplication.persistence.mapper.CuentaAhorrosRowMapper;
@@ -33,10 +34,30 @@ public class CuentaAhorrosRepository implements CuentaAhorrosRepositoryPort {
         } catch (SQLException e) {
             throw new RuntimeException("Error al guardar cuenta de ahorros: " + e.getMessage(), e);
         }
+=======
+import aplication.domain.CuentaAhorros;
+import aplication.domain.enums.EstadoCuenta;
+import aplication.service.ports.CuentaAhorrosRepositoryPort;
+import java.time.LocalDateTime;
+import java.util.*;
+
+public class CuentaAhorrosRepository implements CuentaAhorrosRepositoryPort {
+
+    private final List<CuentaAhorros> cuentas = new ArrayList<>(Arrays.asList(
+            new CuentaAhorros("AH-001", 5000000, LocalDateTime.now(), EstadoCuenta.ACTIVA, 3.5),
+            new CuentaAhorros("AH-002", 1200000, LocalDateTime.now(), EstadoCuenta.ACTIVA, 3.5)
+    ));
+
+    @Override
+    public CuentaAhorros save(CuentaAhorros cuenta) {
+        cuentas.add(cuenta);
+        return cuenta;
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
     }
 
     @Override
     public CuentaAhorros update(String numeroCuenta, CuentaAhorros cuenta) {
+<<<<<<< HEAD
         String sql = "UPDATE cuenta SET saldo=?, estado=?, tasa_interes=? WHERE numero_cuenta=? AND tipo='AHORROS'";
         try (PreparedStatement ps = getConn().prepareStatement(sql)) {
             ps.setDouble(1, cuenta.getSaldo());
@@ -48,10 +69,20 @@ public class CuentaAhorrosRepository implements CuentaAhorrosRepositoryPort {
         } catch (SQLException e) {
             throw new RuntimeException("Error al actualizar cuenta de ahorros: " + e.getMessage(), e);
         }
+=======
+        for (int i = 0; i < cuentas.size(); i++) {
+            if (cuentas.get(i).getNumeroCuenta().equals(numeroCuenta)) {
+                cuentas.set(i, cuenta);
+                return cuenta;
+            }
+        }
+        throw new IllegalArgumentException("Cuenta de ahorros " + numeroCuenta + " no encontrada.");
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
     }
 
     @Override
     public Optional<CuentaAhorros> findByNumeroCuenta(String numeroCuenta) {
+<<<<<<< HEAD
         String sql = "SELECT c.*, cl.nombre_completo FROM cuenta c JOIN cliente cl ON c.cliente_id = cl.id WHERE c.numero_cuenta = ? AND c.tipo = 'AHORROS'";
         try (PreparedStatement ps = getConn().prepareStatement(sql)) {
             ps.setString(1, numeroCuenta);
@@ -87,3 +118,19 @@ public class CuentaAhorrosRepository implements CuentaAhorrosRepositoryPort {
         }
     }
 }
+=======
+        for (CuentaAhorros c : cuentas)
+            if (c.getNumeroCuenta().equals(numeroCuenta)) return Optional.of(c);
+        return Optional.empty();
+    }
+
+    @Override
+    public List<CuentaAhorros> findAll() { return cuentas; }
+
+    @Override
+    public void deleteByNumeroCuenta(String numeroCuenta) {
+        boolean removed = cuentas.removeIf(c -> c.getNumeroCuenta().equals(numeroCuenta));
+        System.out.println(removed ? "Cuenta eliminada." : "Cuenta no encontrada.");
+    }
+}
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460

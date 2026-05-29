@@ -1,5 +1,6 @@
 package aplication.repository;
 
+<<<<<<< HEAD
 import aplication.configuration.DatabaseConnection;
 import aplication.domain.Cliente;
 import aplication.domain.Cuenta;
@@ -45,10 +46,28 @@ public class ClienteRepository implements ClienteRepositoryPort, AuthRepositoryP
         } catch (SQLException e) {
             throw new RuntimeException("Error al guardar cliente: " + e.getMessage(), e);
         }
+=======
+import aplication.domain.Cliente;
+import aplication.service.ports.ClienteRepositoryPort;
+import java.util.*;
+
+public class ClienteRepository implements ClienteRepositoryPort {
+
+    private final List<Cliente> clientes = new ArrayList<>(Arrays.asList(
+            new Cliente(1, "1001234567", "Ana Torres", "3001234567", "ana123", "clave123"),
+            new Cliente(2, "1009876543", "Luis Pérez", "3109876543", "luis456", "clave456")
+    ));
+
+    @Override
+    public Cliente save(Cliente cliente) {
+        clientes.add(cliente);
+        return cliente;
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
     }
 
     @Override
     public Cliente update(int id, Cliente cliente) {
+<<<<<<< HEAD
         String sql = "UPDATE cliente SET identificacion=?, nombre_completo=?, celular=?, email=?, usuario=?, contrasena=? WHERE id=?";
         try (PreparedStatement ps = getConn().prepareStatement(sql)) {
             ps.setString(1, cliente.getIdentificacion());
@@ -63,10 +82,20 @@ public class ClienteRepository implements ClienteRepositoryPort, AuthRepositoryP
         } catch (SQLException e) {
             throw new RuntimeException("Error al actualizar cliente: " + e.getMessage(), e);
         }
+=======
+        for (int i = 0; i < clientes.size(); i++) {
+            if (clientes.get(i).getId() == id) {
+                clientes.set(i, cliente);
+                return cliente;
+            }
+        }
+        throw new IllegalArgumentException("Cliente con id " + id + " no encontrado.");
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
     }
 
     @Override
     public Optional<Cliente> findById(int id) {
+<<<<<<< HEAD
         String sql = "SELECT * FROM cliente WHERE id = ?";
         try (PreparedStatement ps = getConn().prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -165,5 +194,19 @@ public class ClienteRepository implements ClienteRepositoryPort, AuthRepositoryP
         } catch (SQLException e) {
             throw new RuntimeException("Error al cargar cuentas del cliente: " + e.getMessage(), e);
         }
+=======
+        for (Cliente c : clientes)
+            if (c.getId() == id) return Optional.of(c);
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Cliente> findAll() { return clientes; }
+
+    @Override
+    public void deleteById(int id) {
+        boolean removed = clientes.removeIf(c -> c.getId() == id);
+        System.out.println(removed ? "Cliente eliminado." : "Cliente no encontrado.");
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
     }
 }

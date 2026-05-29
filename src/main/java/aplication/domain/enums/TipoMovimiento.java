@@ -17,6 +17,7 @@ public enum TipoMovimiento {
     public String getDescripcion() {
         return descripcion;
     }
+<<<<<<< HEAD
 
     public static TipoMovimiento fromString(String valor) {
         for (TipoMovimiento t : values()) {
@@ -26,4 +27,6 @@ public enum TipoMovimiento {
         }
         throw new IllegalArgumentException("Tipo de movimiento no válido: " + valor);
     }
+=======
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
 }

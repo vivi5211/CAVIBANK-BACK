@@ -64,8 +64,11 @@ public class CuentaCorriente extends Cuenta implements ITransferible {
                 ", sobregiro=" + porcentajeSobregiro + "%, limite=" + limiteSobregiro +
                 ", estado=" + estado.getDescripcion() + "}";
     }
+<<<<<<< HEAD
 
     private int clienteId;
     public int getClienteId() { return clienteId; }
     public void setClienteId(int clienteId) { this.clienteId = clienteId; }
+=======
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
 }

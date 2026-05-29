@@ -1,6 +1,7 @@
 package aplication.view;
 
 import aplication.domain.TarjetaCredito;
+<<<<<<< HEAD
 import aplication.domain.enums.EstadoCuenta;
 import aplication.exception.RecursoNoEncontradoException;
 import aplication.selector.EstadoCuentaSelector;
@@ -8,6 +9,10 @@ import aplication.service.outputs.TarjetaCreditoService;
 import aplication.util.FormValidationUtil;
 import aplication.util.NumeroCuentaUtil;
 
+=======
+import aplication.service.outputs.TarjetaCreditoService;
+import aplication.util.FormValidationUtil;
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
 import java.util.List;
 
 public class TarjetaCreditoView {
@@ -21,6 +26,7 @@ public class TarjetaCreditoView {
     public void crearTarjetaCredito() {
         System.out.println("--- Crear Tarjeta de Credito ---");
         try {
+<<<<<<< HEAD
             double cupo      = FormValidationUtil.validateDouble("Ingrese el cupo: ");
             int numeroCuotas = FormValidationUtil.validateInt("Ingrese el numero de cuotas por defecto: ");
             TarjetaCredito creada = tarjetaCreditoService.crearTarjetaCredito(
@@ -28,12 +34,20 @@ public class TarjetaCreditoView {
             System.out.println("Tarjeta creada exitosamente.");
             System.out.println("  Número: " + creada.getNumeroCuenta());
             System.out.println("  Cupo:   $" + creada.getCupo());
+=======
+            String numeroCuenta = FormValidationUtil.validateString("Ingrese el numero de tarjeta");
+            double cupo = FormValidationUtil.validateDouble("Ingrese el cupo");
+            int numeroCuotas = FormValidationUtil.validateInt("Ingrese el numero de cuotas por defecto");
+            TarjetaCredito creada = tarjetaCreditoService.crearTarjetaCredito(numeroCuenta, cupo, numeroCuotas);
+            System.out.println("Tarjeta de credito creada: " + creada);
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
     public void actualizarTarjetaCredito() {
+<<<<<<< HEAD
         System.out.println("--- Actualizar Tarjeta de Crédito ---");
         try {
             String numeroCuenta = FormValidationUtil.validateString("Ingrese el número de tarjeta: ");
@@ -50,6 +64,19 @@ public class TarjetaCreditoView {
             System.out.println("Tarjeta actualizada: " + actualizada.getNumeroCuenta()
                     + " | Estado: " + actualizada.getEstado().getDescripcion());
         } catch (Exception e) {
+=======
+        System.out.println("--- Actualizar Tarjeta de Credito ---");
+        try {
+            String numeroCuenta = FormValidationUtil.validateString("Ingrese el numero de tarjeta");
+            TarjetaCredito actual = tarjetaCreditoService.obtenerPorNumeroCuenta(numeroCuenta)
+                    .orElseThrow(() -> new IllegalArgumentException("Tarjeta no encontrada."));
+            System.out.println("Datos actuales: " + actual);
+            double cupo = FormValidationUtil.validateDouble("Nuevo cupo (" + actual.getCupo() + ")");
+            int numeroCuotas = FormValidationUtil.validateInt("Nuevo numero de cuotas (" + actual.getNumeroCuotas() + ")");
+            TarjetaCredito actualizada = tarjetaCreditoService.actualizarTarjetaCredito(numeroCuenta, cupo, numeroCuotas);
+            System.out.println("Tarjeta actualizada: " + actualizada);
+        } catch (IllegalArgumentException e) {
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
             System.out.println("Error: " + e.getMessage());
         }
     }

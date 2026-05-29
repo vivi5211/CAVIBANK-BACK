@@ -10,13 +10,17 @@ public class Cliente implements IAutenticable {
     private String identificacion;
     private String nombreCompleto;
     private String celular;
+<<<<<<< HEAD
     private String email;
+=======
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
     private String usuario;
     private String contrasena;
     private int intentosFallidos;
     private boolean bloqueado;
     private List<Cuenta> cuentas;
 
+<<<<<<< HEAD
 
 
 
@@ -24,11 +28,20 @@ public class Cliente implements IAutenticable {
 
     public Cliente(int id, String identificacion, String nombreCompleto, String celular,
                    String email, String usuario, String contrasena) {
+=======
+    public Cliente() {}
+
+    public Cliente(int id, String identificacion, String nombreCompleto, String celular,
+                   String usuario, String contrasena) {
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
         this.id = id;
         this.identificacion = identificacion;
         this.nombreCompleto = nombreCompleto;
         this.celular = celular;
+<<<<<<< HEAD
         this.email = email;
+=======
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.intentosFallidos = 0;
@@ -68,10 +81,13 @@ public class Cliente implements IAutenticable {
     }
 
     // Getters y Setters
+<<<<<<< HEAD
 
     public void setIntentosFallidos(int intentosFallidos) {
         this.intentosFallidos = intentosFallidos;
     }
+=======
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
     public String getIdentificacion() { return identificacion; }
@@ -89,14 +105,22 @@ public class Cliente implements IAutenticable {
     public void setBloqueado(boolean bloqueado) { this.bloqueado = bloqueado; }
     public List<Cuenta> getCuentas() { return cuentas; }
     public void setCuentas(List<Cuenta> cuentas) { this.cuentas = cuentas; }
+<<<<<<< HEAD
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
+=======
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
 
     @Override
     public String toString() {
         return "Cliente{id=" + id + ", identificacion='" + identificacion +
+<<<<<<< HEAD
                 "', nombre='" + nombreCompleto + "', email='" + email +
                 "', usuario='" + usuario + "', bloqueado=" + bloqueado + "}";
+=======
+                "', nombre='" + nombreCompleto + "', usuario='" + usuario +
+                "', bloqueado=" + bloqueado + "}";
+>>>>>>> 9693cc793f3497260386310c62640c6de0c83460
     }
 }
